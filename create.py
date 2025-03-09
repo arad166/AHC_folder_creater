@@ -22,7 +22,8 @@ ignore_items = [
     'run.sh',
     'out.txt',
     'combiner.py',
-    'main'
+    'main',
+    'combined.cpp'
 ]
 
 # .gitignoreファイルに書き込む
