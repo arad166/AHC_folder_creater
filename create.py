@@ -6,11 +6,19 @@ new_folder = r"../AHC999"
 os.makedirs(new_folder, exist_ok=True)  # 既にフォルダがある場合はエラーを出さずに続行
 
 # コピーするファイルのパス（元ファイル）
-source_files = ["combiner.py", "header.hpp", "run.sh", "main.cpp", "log.md"]
+source_files = ["combiner.py", "run.sh", "log.md"]
 
 # 指定したフォルダへファイルをコピー
 for file in source_files:
     shutil.copy(file, new_folder)  # ファイルをコピー
+    
+new_folder_src = os.path.join(new_folder, "src")
+
+source_files_src = ["main.cpp", "header.hpp"]
+os.makedirs(new_folder_src, exist_ok=True)  # 既にフォルダがある場合はエラーを出さずに続行
+
+for file in source_files_src:
+    shutil.copy(file, new_folder_src)  # ファイルをコピー
 
 # 新しい.gitignoreファイルのパス
 gitignore_path = os.path.join(new_folder,".gitignore")
@@ -22,8 +30,8 @@ ignore_items = [
     'run.sh',
     'out.txt',
     'combiner.py',
-    'main',
-    'combined.cpp'
+    'src/main',
+    'src/combined.cpp'
 ]
 
 # .gitignoreファイルに書き込む
