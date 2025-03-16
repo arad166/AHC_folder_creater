@@ -1,5 +1,6 @@
 import re
 import sys
+import os
 from typing import Set
 
 def read_file_content(file_name: str) -> str:
@@ -17,15 +18,16 @@ def make_converted_file_content(
         line = content_lines[i]
         match = re.match(r"^\s*#include\s+\"(.*)\"\s*$", line)
         if match:
-            if match.group(1) not in added_file_names:
-                if match.group(1) in stack:
+            srcmatch = os.path.join("src", match.group(1))
+            if srcmatch not in added_file_names:
+                if srcmatch in stack:
                     print("Circular dependency detected: "
-                          f"{' > '.join(stack + [match.group(1)])}")
+                          f"{' > '.join(stack + [srcmatch])}")
                     exit(1)
-                stack.append(match.group(1))
+                stack.append(srcmatch)
                 content_lines[i] = make_converted_file_content(
-                    match.group(1), stack, added_file_names)
-                added_file_names.add(match.group(1))
+                    srcmatch, stack, added_file_names)
+                added_file_names.add(srcmatch)
                 stack.pop()
             else:
                 content_lines[i] = ""
@@ -40,6 +42,7 @@ def main(argv: list[str]):
         argv[1], [argv[1]], set())
     with open(argv[2], "w") as f:
         f.write(converted_main_file_content)
+    print("complete")
 
 
 if __name__ == "__main__":
