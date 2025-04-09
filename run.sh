@@ -8,3 +8,6 @@ g++ -O0 -std=c++17 -Wall -D_GLIBCXX_DEBUG -I ac-library main.cpp -o main
 ./main < "tools/in/$input_file.txt" > "../out.txt"
 
 cd "/home/arad166/cp/heur/ahcXXX/" || exit 1
+
+# ファイルの内容をクリップボードにコピー
+cat out.txt | xclip -selection clipboard

@@ -2,7 +2,7 @@ import os
 import shutil
 
 # 新しいフォルダの作成
-new_folder = r"../ahc044"
+new_folder = r"../ahc045"
 os.makedirs(new_folder, exist_ok=True)  # 既にフォルダがある場合はエラーを出さずに続行
 
 # コピーするファイルのパス（元ファイル）
