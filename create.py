@@ -20,7 +20,7 @@ if os.path.exists(new_folder):
 os.makedirs(new_folder)
 
 # コピーするファイルのリスト
-source_files = ["combiner.py", "run.sh", "log.md"]
+source_files = ["combiner.py", "run.sh", "runall.sh","log.md"]
 
 # 指定したフォルダへファイルをコピー
 for file in source_files:
@@ -44,7 +44,7 @@ ignore_items = [
     'out.txt',
     'combiner.py',
     'src/main',
-    'src/combined.cpp'
+    'src/combined.cpp',
 ]
 
 with open(gitignore_path, 'w') as f:
