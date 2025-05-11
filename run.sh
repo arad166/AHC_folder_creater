@@ -8,10 +8,10 @@ cd "/home/arad166/cp/heur/ahcxxx/src" || exit 1
 # DEBUG=1 を指定するとデバッグビルドになる
 if [ "$DEBUG" = "1" ]; then
     echo "Building in debug mode...(slow)"
-    g++ -O2 -std=c++23 -Wall -D_GLIBCXX_DEBUG -I ac-library main.cpp -o main.out
+    g++ -O2 -std=c++23 -Wall -D_GLIBCXX_DEBUG -I ac-library main.cpp -o main
 else
     echo "Building in release mode...(fast)"
-    g++ -O3 -std=c++23 -Wall -I ac-library main.cpp -o main.out
+    g++ -O3 -std=c++23 -Wall -I ac-library main.cpp -o main
 fi
 
 cd "/home/arad166/cp/heur/ahcxxx" || exit 1
