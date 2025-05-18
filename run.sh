@@ -16,8 +16,8 @@ fi
 
 cd "/home/arad166/cp/heur/ahcxxx" || exit 1
 
-# 実行
-src/./main < "tools/in/$input_file.txt" > "out.txt"
+# 実行と時間測定（time の stderr 出力をそのまま）
+{ /usr/bin/time -f "\n[Time] Elapsed: %es" src/./main < "tools/in/$input_file.txt" > "out.txt"; } 2>&1
 
 # 結果をクリップボードにコピー
 cat out.txt | xclip -selection clipboard

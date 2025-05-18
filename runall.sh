@@ -7,13 +7,18 @@ LOG_DIR="$BASE_DIR/logs"
 
 mkdir -p "$LOG_DIR"
 
-# タイムスタンプ付きログファイル作成
+# 現在のGitブランチ名を取得（無効な文字は置換）
+branch=$(git -C "$BASE_DIR" rev-parse --abbrev-ref HEAD 2>/dev/null | tr '/' '_' | tr -d '\n')
+
+# タイムスタンプを追加
 timestamp=$(date "+%Y%m%d_%H%M%S")
-err_log="$LOG_DIR/runall_err_$timestamp.log"
+
+# ログファイル名にブランチ名とタイムスタンプを使う
+err_log="$LOG_DIR/${branch}_$timestamp.log"
 
 # コンパイル
 cd "$SRC_DIR" || exit 1
-g++ -O0 -std=c++17 -Wall -D_GLIBCXX_DEBUG -I ac-library main.cpp -o main 2>> "$err_log"
+g++ -O3 -std=c++23 -Wall -I ac-library main.cpp -o main 2>> "$err_log"
 if [ $? -ne 0 ]; then
     echo "コンパイルに失敗しました。" >> "$err_log"
     exit 1
@@ -21,7 +26,7 @@ fi
 
 cd "$BASE_DIR" || exit 1
 
-# 各入力ファイルに対して実行（標準出力は捨てる、標準エラーはログに追加）
+# 各入力ファイルに対して実行
 for in_file in "$IN_DIR"/*.txt; do
     filename=$(basename "$in_file" .txt)
     echo "Running $filename..." >> "$err_log"
