@@ -41,6 +41,7 @@ ignore_items = [
     'log.md',
     'tools',
     'run.sh',
+    'runall.sh',
     'out.txt',
     'combiner.py',
     'combine.sh',
